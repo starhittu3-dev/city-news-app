@@ -11,7 +11,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Extract Project Zip if present
+      - name: Extract Zip if present
         run: |
           if [ -f "city-khabar (2).zip" ]; then
             unzip -o "city-khabar (2).zip"
@@ -28,14 +28,16 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Generate Wrapper and Build APK
+      - name: Build Debug APK
         run: |
           gradle wrapper
           ./gradlew assembleDebug
 
-      - name: Upload APK
+      - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: city-khabar-app
-          path: "**/*.apk"
+          name: CityKhabar-APK
+          path: |
+            **/*.apk
+          if-no-files-found: ignore
           
