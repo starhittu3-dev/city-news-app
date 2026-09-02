@@ -11,6 +11,14 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: Extract Project Zip if present
+        run: |
+          if [ -f "city-khabar (2).zip" ]; then
+            unzip -o "city-khabar (2).zip"
+          elif [ -f "city-khabar.zip" ]; then
+            unzip -o "city-khabar.zip"
+          fi
+
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
