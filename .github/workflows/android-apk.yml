@@ -18,6 +18,10 @@ jobs:
           elif [ -f "city-khabar.zip" ]; then
             unzip -o "city-khabar.zip"
           fi
+          # अगर फ़ाइलें अंदर वाले फ़ोल्डर में चली गईं तो उन्हें बाहर लाएँ
+          if [ -d "city-news-app" ]; then
+            cp -r city-news-app/* . || true
+          fi
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -38,6 +42,7 @@ jobs:
         with:
           name: CityKhabar-APK
           path: |
+            **/build/outputs/apk/debug/*.apk
             **/*.apk
           if-no-files-found: ignore
           
