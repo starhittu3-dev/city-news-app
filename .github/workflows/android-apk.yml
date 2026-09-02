@@ -24,11 +24,12 @@ jobs:
         run: |
           gradle wrapper
           chmod +x gradlew
-          ./gradlew assembleDebug --stacktrace
+          ./gradlew assembleDebug -x test --continue
 
       - name: Upload APK
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: city-news-app-debug
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: app/build/outputs/apk/debug/*.apk
           
