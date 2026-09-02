@@ -14,8 +14,8 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          distribution: 'temurin'
           java-version: '17'
+          distribution: 'temurin'
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -23,12 +23,11 @@ jobs:
       - name: Generate Wrapper and Build APK
         run: |
           gradle wrapper
-          chmod +x gradlew
-          ./gradlew assembleDebug -x test --continue
+          ./gradlew assembleDebug
 
       - name: Upload APK
-        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: city-news-app-debug
-        path: app/build/outputs/apk/
+          name: city-khabar-app
+          path: "**/*.apk"
+          
